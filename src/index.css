@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: 'Kumbh Sans', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-weight: 400;
+  background-color: #fff;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Intro-page */
+
+.intro-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem;
+}
+
+.intro-page h1,
+.intro-page p,
+.intro-page h3 {
+  text-align: center;
+}
+
+.intro-page h1 {
+  font-size: 3rem;
+}
+
+.intro-page p {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.intro-page h3 {
+  font-size: 2rem;
+  font-style: italic;
+}
+
+.languages-box h4 {
+  font-size: 1.5rem;
+}
+
+.picture-box {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.intropic-container {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.intropage-img {
+  width: 8rem;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+}

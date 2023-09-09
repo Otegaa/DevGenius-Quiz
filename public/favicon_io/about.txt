@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Kaisei HarunoUmi
+- Font Author: Copyright 2020 The Kaisei Project Authors (https://github.com/Font-Kai/Kaisei)
+- Font Source: http://fonts.gstatic.com/s/kaiseiharunoumi/v8/HI_RiZQSLqBQoAHhK_C6N_nzy_jcGsv5sM8u3mk.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
