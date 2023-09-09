@@ -3,7 +3,7 @@ import IntroPictures from './IntroPictures';
 const IntroPage = () => {
   return (
     <div className="intro-page">
-      <h1>Welcome to the DevGenius Quiz!</h1>
+      <h1>Welcome to the DevGenius Quiz!😇</h1>
       <p>
         Do you want to test your coding knowledge with fun and challenging
         quizzes?
