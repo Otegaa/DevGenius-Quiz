@@ -33,7 +33,30 @@ body {
   justify-content: center;
 }
 
-/* Intro-page */
+/* Styles for buttons */
+
+.btn {
+  display: block;
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.7rem;
+  border: 2px solid #ffe8cc;
+  background-color: #ffe8cc;
+  padding: 1.2rem 2.4rem;
+  cursor: pointer;
+  border-radius: 100px;
+  transition: 0.3s;
+}
+
+.btn:not([disabled]):hover {
+  background-color: #ffa94d;
+}
+
+.btn[disabled]:hover {
+  cursor: not-allowed;
+}
+
+/* Question-homepage */
 
 .intro-page {
   display: flex;
@@ -91,5 +114,71 @@ body {
   height: auto;
   display: block;
   margin: 0 auto;
+  cursor: pointer;
+}
+
+/* Options */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 3.2rem;
+}
+
+.btn-option {
+  text-align: start;
+}
+
+.btn-option:not([disabled]):hover {
+  transform: translateX(1.2rem);
+}
+
+.answer {
+  transform: translateX(2rem);
+  background-color: #ffa94d;
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.option-img {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.modal button {
+  margin: 5px;
+  padding: 5px 10px;
   cursor: pointer;
 }

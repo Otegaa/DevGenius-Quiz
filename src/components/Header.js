@@ -1,4 +1,10 @@
+import Timer from './Timer';
+
 const Header = () => {
-  return <div>Header</div>;
+  return (
+    <div>
+      <Timer />
+    </div>
+  );
 };
 export default Header;

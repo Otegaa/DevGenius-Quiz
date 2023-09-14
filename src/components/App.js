@@ -1,10 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './HomePage';
-import QuestionsHomePage from './QuestionsHomePage';
-import FrameworksPage from './FrameworksPage';
+import HomePage from '../Pages/HomePage';
+import QuestionsHomePage from '../Pages/QuestionsHomePage';
+import FrameworksPage from '../Pages/FrameworksPage';
 import Questions from './Questions';
 import Error from './Error';
-import SharedLayout from './SharedLayout';
 
 function App() {
   return (
@@ -12,11 +11,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="questions" element={<SharedLayout />}>
-            <Route index element={<QuestionsHomePage />} />
-            <Route path=":questionsName" element={<Questions />} />
-            <Route path="frameworks" element={<FrameworksPage />} />
-          </Route>
+          <Route path="languages" element={<QuestionsHomePage />} />
+          <Route path="questions/:language" element={<Questions />} />
+          <Route path="javascript/frameworks" element={<FrameworksPage />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>

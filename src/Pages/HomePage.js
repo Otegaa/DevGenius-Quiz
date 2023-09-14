@@ -9,7 +9,7 @@ const HomePage = () => {
         quizzes?
       </p>
       <h3>You're in the right place!</h3>
-      <NavLink to="/questions">Go to questions</NavLink>
+      <NavLink to="/languages">Go to questions</NavLink>
     </div>
   );
 };
