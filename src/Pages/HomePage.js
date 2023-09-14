@@ -1,6 +1,6 @@
-import IntroPictures from './IntroPictures';
+import { NavLink } from 'react-router-dom';
 
-const IntroPage = () => {
+const HomePage = () => {
   return (
     <div className="intro-page">
       <h1>Welcome to the DevGenius Quiz!😇</h1>
@@ -9,11 +9,8 @@ const IntroPage = () => {
         quizzes?
       </p>
       <h3>You're in the right place!</h3>
-      <div className="languages-box">
-        <h4>Please select your favorite language!</h4>
-        <IntroPictures />
-      </div>
+      <NavLink to="/languages">Go to questions</NavLink>
     </div>
   );
 };
-export default IntroPage;
+export default HomePage;

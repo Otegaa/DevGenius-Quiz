@@ -1,4 +1,4 @@
-import reactLogo from 'assets/logo512.png';
+import reactLogo from 'assets/images/logo512.png';
 
 export const data = [
   {
