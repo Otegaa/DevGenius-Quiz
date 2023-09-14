@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from '../Pages/HomePage';
-import QuestionsHomePage from '../Pages/QuestionsHomePage';
-import FrameworksPage from '../Pages/FrameworksPage';
+import HomePage from '../pages/HomePage';
+import QuestionsHomePage from '../pages/QuestionsHomePage';
+import FrameworksPage from '../pages/FrameworksPage';
 import Questions from './Questions';
 import Error from './Error';
+import FinishedQuiz from 'pages/FinishedQuiz';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="languages" element={<QuestionsHomePage />} />
           <Route path="questions/:language" element={<Questions />} />
           <Route path="javascript/frameworks" element={<FrameworksPage />} />
+          <Route path="score/:language" element={<FinishedQuiz />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>

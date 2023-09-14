@@ -14,6 +14,7 @@ const initialState = {
   answer: null,
   points: 0,
 };
+
 const reducer = (state, { type, payload }) => {
   switch (type) {
     case 'newAnswer':
@@ -55,7 +56,7 @@ const reducer = (state, { type, payload }) => {
 const QuizProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [{ index, questions, answer }, dispatch] = useReducer(
+  const [{ index, questions, answer, points }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -79,6 +80,7 @@ const QuizProvider = ({ children }) => {
         questions,
         dispatch,
         answer,
+        points,
         handleQuitClick,
         handleCancel,
         handleConfirm,
