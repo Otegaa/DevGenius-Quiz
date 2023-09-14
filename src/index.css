@@ -201,6 +201,12 @@ progress {
   margin-right: 4px;
 }
 
+.highscore {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 4.8rem;
+}
+
 /* Modal */
 .modal {
   position: fixed;

@@ -24,7 +24,13 @@ const NextButton = () => {
 
   if (index === numOfQuestions - 1)
     return (
-      <button className="btn" onClick={() => navigate(`/score/${language}`)}>
+      <button
+        className="btn"
+        onClick={() => {
+          dispatch({ type: 'finish' });
+          navigate(`/score/${language}`);
+        }}
+      >
         Finish
       </button>
     );

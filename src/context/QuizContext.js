@@ -13,6 +13,7 @@ const initialState = {
   index: 0,
   answer: null,
   points: 0,
+  highscore: 0,
 };
 
 const reducer = (state, { type, payload }) => {
@@ -42,6 +43,13 @@ const reducer = (state, { type, payload }) => {
         answer: null,
       };
 
+    case 'finish':
+      return {
+        ...state,
+        highscore:
+          state.points > state.highscore ? state.points : state.highscore,
+      };
+
     case 'resetState':
       return {
         ...initialState,
@@ -56,10 +64,8 @@ const reducer = (state, { type, payload }) => {
 const QuizProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [{ index, questions, answer, points }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ index, questions, answer, points, highscore }, dispatch] =
+    useReducer(reducer, initialState);
 
   const handleQuitClick = () => {
     setIsModalOpen(true);
@@ -81,6 +87,7 @@ const QuizProvider = ({ children }) => {
         dispatch,
         answer,
         points,
+        highscore,
         handleQuitClick,
         handleCancel,
         handleConfirm,
