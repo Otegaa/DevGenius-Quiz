@@ -3,10 +3,10 @@ import NextButton from './NextButton';
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <footer className="footer">
       <Quit />
       <NextButton />
-    </div>
+    </footer>
   );
 };
 export default Footer;

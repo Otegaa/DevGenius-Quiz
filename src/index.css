@@ -117,6 +117,15 @@ body {
   cursor: pointer;
 }
 
+/* Header */
+.timer {
+  font-size: 1.8rem;
+  color: #000;
+  border: 2px solid #ffa94d;
+  padding: 1.35rem 2.8rem;
+  border-radius: 100px;
+}
+
 /* Progress bar */
 .progress {
   margin-bottom: 4rem;

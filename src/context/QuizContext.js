@@ -14,10 +14,20 @@ const initialState = {
   answer: null,
   points: 0,
   highscore: 0,
+  secsRemaining: 0,
 };
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
+    case 'start':
+      const selectedLanguage = payload;
+      const secsRemaining = state.questions[selectedLanguage].length * 30;
+
+      return {
+        ...state,
+        secsRemaining: secsRemaining,
+      };
+
     case 'newAnswer':
       const { language, index, answer } = payload;
       const currentQuestions = state.questions[language];
@@ -50,6 +60,12 @@ const reducer = (state, { type, payload }) => {
           state.points > state.highscore ? state.points : state.highscore,
       };
 
+    case 'timer':
+      return {
+        ...state,
+        secsRemaining: state.secsRemaining - 1,
+      };
+
     case 'resetState':
       return {
         ...initialState,
@@ -64,8 +80,10 @@ const reducer = (state, { type, payload }) => {
 const QuizProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [{ index, questions, answer, points, highscore }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { index, questions, answer, points, highscore, secsRemaining },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   const handleQuitClick = () => {
     setIsModalOpen(true);
@@ -88,6 +106,7 @@ const QuizProvider = ({ children }) => {
         answer,
         points,
         highscore,
+        secsRemaining,
         handleQuitClick,
         handleCancel,
         handleConfirm,

@@ -4,12 +4,14 @@ import { useQuiz } from 'context/QuizContext';
 
 const IntroPictures = () => {
   const { dispatch } = useQuiz();
+
   return (
     <div className="container">
       <div className="intropic-container">
         {data.map((lang) => {
           const { img, name } = lang;
 
+          // Move to frameworks page
           if (name === 'Javascript') {
             return (
               <Link to="/javascript/frameworks" key={name}>
@@ -22,13 +24,19 @@ const IntroPictures = () => {
 
           // category -medium, easy, hard, all
           return (
-            <Link to={`/questions/${name}`} key={name}>
+            <Link
+              to={`/questions/${name}`}
+              key={name}
+              onClick={() => dispatch({ type: 'start', payload: name })}
+            >
               <div className="picture-box">
                 <img
                   src={img}
                   alt={name}
                   className="intropage-img"
-                  onClick={() => dispatch({ type: 'resetState' })}
+                  onClick={() => {
+                    dispatch({ type: 'resetState' });
+                  }}
                 />
               </div>
             </Link>

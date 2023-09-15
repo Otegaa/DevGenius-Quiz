@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import HomePage from '../pages/HomePage';
 import QuestionsHomePage from '../pages/QuestionsHomePage';
 import FrameworksPage from '../pages/FrameworksPage';
+import FinishedQuiz from 'pages/FinishedQuiz';
+
 import Questions from './Questions';
 import Error from './Error';
-import FinishedQuiz from 'pages/FinishedQuiz';
 
 function App() {
   return (
