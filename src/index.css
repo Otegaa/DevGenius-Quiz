@@ -118,6 +118,19 @@ body {
 }
 
 /* Header */
+
+.header {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-img {
+  width: 6rem;
+  height: 6rem;
+}
+
 .timer {
   font-size: 1.8rem;
   color: #000;

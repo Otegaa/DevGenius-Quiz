@@ -15,7 +15,7 @@ const Progress = () => {
   );
 
   return (
-    <header className="progress">
+    <div className="progress">
       <progress max={numOfQuestions} value={index + Number(answer !== null)} />
 
       <p>
@@ -24,7 +24,7 @@ const Progress = () => {
       <p>
         <strong>{points}</strong> / {maxPoints}
       </p>
-    </header>
+    </div>
   );
 };
 export default Progress;
