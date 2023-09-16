@@ -139,6 +139,10 @@ body {
   border-radius: 100px;
 }
 
+.warning {
+  color: red;
+}
+
 /* Progress bar */
 .progress {
   margin-bottom: 4rem;

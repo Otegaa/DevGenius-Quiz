@@ -3,7 +3,7 @@ import { data } from 'data/data';
 import { useQuiz } from 'context/QuizContext';
 
 const IntroPictures = () => {
-  const { dispatch } = useQuiz();
+  const { dispatch, handleCancel } = useQuiz();
 
   return (
     <div className="container">
@@ -27,7 +27,10 @@ const IntroPictures = () => {
             <Link
               to={`/questions/${name}`}
               key={name}
-              onClick={() => dispatch({ type: 'start', payload: name })}
+              onClick={() => {
+                handleCancel();
+                dispatch({ type: 'start', payload: name });
+              }}
             >
               <div className="picture-box">
                 <img
