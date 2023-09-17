@@ -2,11 +2,13 @@ import { createContext, useContext, useReducer, useState } from 'react';
 import { languagesQuestions } from 'data/questions';
 import correctAnswerSound from 'assets/Audio/correct-answer.mp3';
 import wrongAnswerSound from 'assets/Audio/Wrong-answer.mp3';
+import warningSound from 'assets/Audio/warning-sound.wav';
 
 const QuizContext = createContext();
 
 const playCorrectSound = new Audio(correctAnswerSound);
 const playWrongSound = new Audio(wrongAnswerSound);
+const warningTimeSound = new Audio(warningSound);
 
 const initialState = {
   questions: languagesQuestions,
@@ -111,6 +113,7 @@ const QuizProvider = ({ children }) => {
         handleCancel,
         handleConfirm,
         isModalOpen,
+        warningTimeSound,
       }}
     >
       {children}

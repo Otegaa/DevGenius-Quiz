@@ -2,7 +2,8 @@ import { useQuiz } from 'context/QuizContext';
 import { useNavigate } from 'react-router-dom';
 
 const Modal = () => {
-  const { handleCancel, handleConfirm, isModalOpen } = useQuiz();
+  const { handleCancel, handleConfirm, isModalOpen, warningTimeSound } =
+    useQuiz();
   const navigate = useNavigate();
 
   if (!isModalOpen) return null;
@@ -15,6 +16,7 @@ const Modal = () => {
         <button
           onClick={() => {
             handleConfirm();
+            warningTimeSound.pause();
             navigate('/languages');
           }}
         >

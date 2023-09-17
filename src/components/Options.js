@@ -9,7 +9,7 @@ const Options = () => {
 
   const hasAnswered = answer !== null;
 
-  const questionsObj = questions[language];
+  const questionsObj = questions[language] || [];
   const question = questionsObj[index];
 
   const handleOptionClick = (optionIndex) => {

@@ -2,12 +2,9 @@ import { useQuiz } from 'context/QuizContext';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLanguageParam from './useLanguageParams';
-import warningSound from 'assets/Audio/warning-sound.wav';
-
-const warningTimeSound = new Audio(warningSound);
 
 const Timer = () => {
-  const { dispatch, secsRemaining } = useQuiz();
+  const { dispatch, secsRemaining, warningTimeSound } = useQuiz();
   const navigate = useNavigate();
   const language = useLanguageParam();
   const mins = Math.floor(secsRemaining / 60);
@@ -29,7 +26,7 @@ const Timer = () => {
     if (secsRemaining === 0) {
       warningTimeSound.pause();
     }
-  }, [secsRemaining]);
+  }, [secsRemaining, warningTimeSound]);
 
   useEffect(() => {
     if (secsRemaining === 0) {

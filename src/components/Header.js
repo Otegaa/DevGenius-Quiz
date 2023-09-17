@@ -1,10 +1,10 @@
-import { Logo } from './Logo';
+import LogoLanguages from './LogoLanguages';
 import Timer from './Timer';
 
 const Header = () => {
   return (
     <header className="header">
-      <Logo />
+      <LogoLanguages />
       <Timer />
     </header>
   );
