@@ -1,6 +1,6 @@
 import { useQuiz } from 'context/QuizContext';
 import Options from './Options';
-import useLanguageParam from './useLanguageParams';
+import useLanguageParam from '../hooks/useLanguageParams';
 
 const Question = () => {
   const language = useLanguageParam();

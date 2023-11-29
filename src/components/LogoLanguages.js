@@ -1,5 +1,5 @@
 import { data } from 'data/data';
-import useLanguageParam from './useLanguageParams';
+import useLanguageParam from '../hooks/useLanguageParams';
 import getLanguageImage from './getLanguageImage';
 
 const LogoLanguages = () => {

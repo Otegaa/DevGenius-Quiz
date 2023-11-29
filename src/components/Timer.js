@@ -1,7 +1,7 @@
 import { useQuiz } from 'context/QuizContext';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useLanguageParam from './useLanguageParams';
+import useLanguageParam from '../hooks/useLanguageParams';
 
 const Timer = () => {
   const { dispatch, secsRemaining, warningTimeSound } = useQuiz();

@@ -1,5 +1,5 @@
 import { useQuiz } from 'context/QuizContext';
-import useLanguageParam from './useLanguageParams';
+import useLanguageParam from '../hooks/useLanguageParams';
 import { useNavigate } from 'react-router-dom';
 
 const NextButton = () => {

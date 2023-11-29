@@ -15,7 +15,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="languages" element={<QuestionsHomePage />} />
           <Route path="questions/:language" element={<Questions />} />
-          {/* <Route path="javascript/frameworks" element={<FrameworksPage />} /> */}
           <Route path="score/:language" element={<FinishedQuiz />} />
           <Route path="*" element={<Error />} />
         </Routes>

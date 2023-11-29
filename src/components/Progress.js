@@ -1,5 +1,5 @@
 import { useQuiz } from 'context/QuizContext';
-import useLanguageParam from './useLanguageParams';
+import useLanguageParam from '../hooks/useLanguageParams';
 
 const Progress = () => {
   const { index, points, questions, answer } = useQuiz();
@@ -19,7 +19,7 @@ const Progress = () => {
       <progress max={numOfQuestions} value={index + Number(answer !== null)} />
 
       <p>
-        Question <strong>{index + 1}</strong> / {numOfQuestions};
+        Question <strong>{index + 1}</strong> / {numOfQuestions}
       </p>
       <p>
         <strong>{points}</strong> / {maxPoints}

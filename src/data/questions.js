@@ -566,7 +566,7 @@ export const languagesQuestions = {
         'Document Order Model',
         'Dynamic Object Model',
       ],
-      correctAns: 0,
+      correctOption: 0,
       points: 10,
     },
     {
@@ -578,20 +578,20 @@ export const languagesQuestions = {
         'let and const',
         'const and var',
       ],
-      correctAns: 2,
+      correctOption: 2,
       points: 10,
     },
     {
       question: "What is the result of '5' + 3 in JavaScript?",
       options: ['53', '8', '35', "'53'"],
-      correctAns: 3,
+      correctOption: 3,
       points: 10,
     },
     {
       question:
         'Which function is used to parse a string to an integer in JavaScript?',
       options: ['parseInt()', 'toInteger()', 'parseString()', "'toInt()'"],
-      correctAns: 0,
+      correctOption: 0,
       points: 10,
     },
     {
@@ -602,7 +602,7 @@ export const languagesQuestions = {
         'To sort the elements in an array.',
         'To filter out elements from an array.',
       ],
-      correctAns: 0,
+      correctOption: 0,
       points: 20,
     },
     {
@@ -614,13 +614,13 @@ export const languagesQuestions = {
         'To attach an event handler function to an HTML element.',
         'To create a new event in JavaScript.',
       ],
-      correctAns: 2,
+      correctOption: 2,
       points: 20,
     },
     {
       question: 'What is the output of console.log(typeof NaN) in JavaScript?',
       options: ["'number'", "'string'", "'NaN'", "'undefined'"],
-      correctAns: 0,
+      correctOption: 0,
       points: 20,
     },
     {
@@ -631,7 +631,7 @@ export const languagesQuestions = {
         'A popular JavaScript framework for handling callbacks.',
         'A coding pattern for handling asynchronous code.',
       ],
-      correctAns: 0,
+      correctOption: 0,
       points: 30,
     },
     {
@@ -642,7 +642,7 @@ export const languagesQuestions = {
         'To handle errors in asynchronous code.',
         'To declare a variable with a fixed value.',
       ],
-      correctAns: 1,
+      correctOption: 1,
       points: 30,
     },
     {
@@ -653,7 +653,7 @@ export const languagesQuestions = {
         "Only with 'var'.",
         'They do, but after declaration.',
       ],
-      correctAns: 1,
+      correctOption: 1,
       points: 30,
     },
   ],
