@@ -1,4 +1,4 @@
-import { useQuiz } from 'context/QuizContext';
+import { useQuiz } from 'contexts/QuizContext';
 import Modal from './Modal';
 
 const Quit = () => {

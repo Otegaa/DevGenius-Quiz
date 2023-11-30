@@ -1,4 +1,4 @@
-import { useQuiz } from 'context/QuizContext';
+import { useQuiz } from 'contexts/QuizContext';
 import Options from './Options';
 import useLanguageParam from '../hooks/useLanguageParams';
 

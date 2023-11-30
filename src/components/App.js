@@ -6,6 +6,7 @@ import FinishedQuiz from 'pages/FinishedQuiz';
 
 import Questions from './Questions';
 import Error from './Error';
+import Login from 'pages/Login';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="languages" element={<QuestionsHomePage />} />
           <Route path="questions/:language" element={<Questions />} />
           <Route path="score/:language" element={<FinishedQuiz />} />
+          <Route path="login" element={<Login />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>

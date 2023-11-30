@@ -1,4 +1,4 @@
-import { useQuiz } from 'context/QuizContext';
+import { useQuiz } from 'contexts/QuizContext';
 import useLanguageParam from '../hooks/useLanguageParams';
 
 const Progress = () => {

@@ -1,4 +1,4 @@
-import { useQuiz } from 'context/QuizContext';
+import { useQuiz } from 'contexts/QuizContext';
 import { useNavigate } from 'react-router-dom';
 
 const Modal = () => {

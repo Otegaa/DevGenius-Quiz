@@ -97,6 +97,7 @@ const QuizProvider = ({ children }) => {
 
   const handleConfirm = () => {
     setIsModalOpen(false);
+    dispatch({ type: 'resetState' });
   };
 
   return (

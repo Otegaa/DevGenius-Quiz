@@ -1,4 +1,4 @@
-import { useQuiz } from 'context/QuizContext';
+import { useQuiz } from 'contexts/QuizContext';
 import useLanguageParam from '../hooks/useLanguageParams';
 import correctAnswerImg from 'assets/images/correct1.svg';
 import wrongAnswerImg from 'assets/images/wrong-answer.svg';

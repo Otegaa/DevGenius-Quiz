@@ -1,4 +1,4 @@
-import { useQuiz } from 'context/QuizContext';
+import { useQuiz } from 'contexts/QuizContext';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLanguageParam from '../hooks/useLanguageParams';

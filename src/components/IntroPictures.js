@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { data } from 'data/data';
-import { useQuiz } from 'context/QuizContext';
+import { useQuiz } from 'contexts/QuizContext';
 
 const IntroPictures = () => {
   const { dispatch, handleCancel } = useQuiz();
