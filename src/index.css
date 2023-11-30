@@ -259,3 +259,15 @@ progress {
   padding: 0.5rem 1rem;
   cursor: pointer;
 }
+
+.errRed {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.hide {
+  display: none;
+}
