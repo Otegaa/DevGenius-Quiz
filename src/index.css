@@ -117,6 +117,32 @@ body {
   cursor: pointer;
 }
 
+/* Header */
+
+.header {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-img {
+  width: 6rem;
+  height: 6rem;
+}
+
+.timer {
+  font-size: 1.8rem;
+  color: #000;
+  border: 2px solid #ffa94d;
+  padding: 1.35rem 2.8rem;
+  border-radius: 100px;
+}
+
+.warning {
+  color: red;
+}
+
 /* Progress bar */
 .progress {
   margin-bottom: 4rem;
@@ -201,6 +227,12 @@ progress {
   margin-right: 4px;
 }
 
+.highscore {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 4.8rem;
+}
+
 /* Modal */
 .modal {
   position: fixed;
@@ -226,4 +258,16 @@ progress {
   margin: 0.5rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
+}
+
+.errRed {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.hide {
+  display: none;
 }

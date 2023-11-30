@@ -1,5 +1,5 @@
-import { useQuiz } from 'context/QuizContext';
-import useLanguageParam from './useLanguageParams';
+import { useQuiz } from 'contexts/QuizContext';
+import useLanguageParam from '../hooks/useLanguageParams';
 import { useNavigate } from 'react-router-dom';
 
 const NextButton = () => {
@@ -24,7 +24,13 @@ const NextButton = () => {
 
   if (index === numOfQuestions - 1)
     return (
-      <button className="btn" onClick={() => navigate(`/score/${language}`)}>
+      <button
+        className="btn"
+        onClick={() => {
+          dispatch({ type: 'finish' });
+          navigate(`/score/${language}`);
+        }}
+      >
         Finish
       </button>
     );

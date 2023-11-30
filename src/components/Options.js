@@ -1,5 +1,5 @@
-import { useQuiz } from 'context/QuizContext';
-import useLanguageParam from './useLanguageParams';
+import { useQuiz } from 'contexts/QuizContext';
+import useLanguageParam from '../hooks/useLanguageParams';
 import correctAnswerImg from 'assets/images/correct1.svg';
 import wrongAnswerImg from 'assets/images/wrong-answer.svg';
 
@@ -9,7 +9,7 @@ const Options = () => {
 
   const hasAnswered = answer !== null;
 
-  const questionsObj = questions[language];
+  const questionsObj = questions[language] || [];
   const question = questionsObj[index];
 
   const handleOptionClick = (optionIndex) => {

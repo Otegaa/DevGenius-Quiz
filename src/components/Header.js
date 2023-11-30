@@ -1,10 +1,12 @@
+import LogoLanguages from './LogoLanguages';
 import Timer from './Timer';
 
 const Header = () => {
   return (
-    <div>
+    <header className="header">
+      <LogoLanguages />
       <Timer />
-    </div>
+    </header>
   );
 };
 export default Header;

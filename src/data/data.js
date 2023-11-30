@@ -1,5 +1,3 @@
-import reactLogo from 'assets/images/logo512.png';
-
 export const data = [
   {
     name: 'Javascript',
@@ -26,16 +24,9 @@ export const data = [
     name: 'Golang',
     img: 'https://www.svgrepo.com/show/355038/golang.svg',
   },
-];
-
-export const dataJavascript = [
-  {
-    name: 'Javascript',
-    img: 'https://www.svgrepo.com/show/353925/javascript.svg',
-  },
   {
     name: 'React',
-    img: { reactLogo },
+    img: 'https://www.svgrepo.com/show/354259/react.svg',
   },
   {
     name: 'Vue',
