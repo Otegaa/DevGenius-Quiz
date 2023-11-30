@@ -7,6 +7,8 @@ import FinishedQuiz from 'pages/FinishedQuiz';
 import Questions from './Questions';
 import Error from './Error';
 import Login from 'pages/Login';
+import ProtectedRoute from 'pages/ProtectedRoute';
+import AppLayout from './AppLayout';
 
 function App() {
   return (
@@ -14,10 +16,18 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="languages" element={<QuestionsHomePage />} />
-          <Route path="questions/:language" element={<Questions />} />
-          <Route path="score/:language" element={<FinishedQuiz />} />
-          <Route path="login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="languages" element={<QuestionsHomePage />} />
+            <Route path="questions/:language" element={<Questions />} />
+            <Route path="score/:language" element={<FinishedQuiz />} />
+          </Route>
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
