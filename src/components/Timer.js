@@ -25,6 +25,7 @@ const Timer = () => {
     }
     if (secsRemaining === 0) {
       warningTimeSound.pause();
+      warningTimeSound.currentTime = 0;
     }
   }, [secsRemaining, warningTimeSound]);
 

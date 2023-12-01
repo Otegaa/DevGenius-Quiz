@@ -7,8 +7,11 @@ import warningSound from 'assets/Audio/warning-sound.wav';
 const QuizContext = createContext();
 
 const playCorrectSound = new Audio(correctAnswerSound);
+playCorrectSound.volume = 0.1;
 const playWrongSound = new Audio(wrongAnswerSound);
+playWrongSound.volume = 0.1;
 const warningTimeSound = new Audio(warningSound);
+warningTimeSound.volume = 0.1;
 
 const initialState = {
   questions: languagesQuestions,
@@ -35,8 +38,15 @@ const reducer = (state, { type, payload }) => {
       const currentQuestions = state.questions[language];
       const question = currentQuestions[index];
       const isCorrect = answer === question.correctOption;
-      if (isCorrect) playCorrectSound.play();
-      if (!isCorrect) playWrongSound.play();
+
+      if (isCorrect) {
+        playCorrectSound.currentTime = 0;
+        playCorrectSound.play();
+      }
+      if (!isCorrect) {
+        playWrongSound.currentTime = 0;
+        playWrongSound.play();
+      }
 
       const updatedPoints = isCorrect
         ? state.points + question.points
@@ -81,6 +91,7 @@ const reducer = (state, { type, payload }) => {
 
 const QuizProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [muteSound, setMuteSound] = useState();
 
   const [
     { index, questions, answer, points, highscore, secsRemaining },
@@ -100,6 +111,16 @@ const QuizProvider = ({ children }) => {
     dispatch({ type: 'resetState' });
   };
 
+  const handleMuteSound = () => {
+    setMuteSound(true);
+    playCorrectSound.pause();
+    playCorrectSound.currentTime = 0;
+    playWrongSound.pause();
+    playWrongSound.currentTime = 0;
+    warningTimeSound.pause();
+    warningTimeSound.currentTime = 0;
+  };
+
   return (
     <QuizContext.Provider
       value={{
@@ -113,6 +134,8 @@ const QuizProvider = ({ children }) => {
         handleQuitClick,
         handleCancel,
         handleConfirm,
+        muteSound,
+        handleMuteSound,
         isModalOpen,
         warningTimeSound,
       }}
