@@ -26,7 +26,7 @@ const Timer = () => {
   }, [language, navigate, secsRemaining, dispatch]);
 
   return (
-    <div className={`timer ${secsRemaining < 31 ? 'warning' : ''}`}>
+    <div className={`timer ${secsRemaining < 31 ? 'pulsate' : ''}`}>
       {mins < 10 && '0'}
       {mins}:{secs < 10 && '0'}
       {secs}
