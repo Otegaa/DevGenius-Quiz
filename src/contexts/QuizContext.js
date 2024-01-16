@@ -1,8 +1,13 @@
-import { createContext, useContext, useReducer, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useReducer,
+  useState,
+} from 'react';
 import { languagesQuestions } from 'data/questions';
 import correctAnswerSound from 'assets/Audio/correct-answer.mp3';
 import wrongAnswerSound from 'assets/Audio/Wrong-answer.mp3';
-import warningSound from 'assets/Audio/warning-sound.wav';
 
 const QuizContext = createContext();
 
@@ -10,8 +15,6 @@ const playCorrectSound = new Audio(correctAnswerSound);
 playCorrectSound.volume = 0.1;
 const playWrongSound = new Audio(wrongAnswerSound);
 playWrongSound.volume = 0.1;
-const warningTimeSound = new Audio(warningSound);
-warningTimeSound.volume = 0.1;
 
 const initialState = {
   questions: languagesQuestions,
@@ -24,16 +27,17 @@ const initialState = {
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
-    case 'start':
+    case 'start': {
       const selectedLanguage = payload;
-      const secsRemaining = state.questions[selectedLanguage].length * 30;
+      const secsRemaining = state.questions[selectedLanguage].length * 15;
 
       return {
         ...state,
         secsRemaining: secsRemaining,
       };
+    }
 
-    case 'newAnswer':
+    case 'newAnswer': {
       const { language, index, answer } = payload;
       const currentQuestions = state.questions[language];
       const question = currentQuestions[index];
@@ -57,6 +61,7 @@ const reducer = (state, { type, payload }) => {
         answer,
         points: updatedPoints,
       };
+    }
 
     case 'nextQuestion':
       return {
@@ -91,7 +96,6 @@ const reducer = (state, { type, payload }) => {
 
 const QuizProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [muteSound, setMuteSound] = useState();
 
   const [
     { index, questions, answer, points, highscore, secsRemaining },
@@ -111,37 +115,36 @@ const QuizProvider = ({ children }) => {
     dispatch({ type: 'resetState' });
   };
 
-  const handleMuteSound = () => {
-    setMuteSound(true);
-    playCorrectSound.pause();
-    playCorrectSound.currentTime = 0;
-    playWrongSound.pause();
-    playWrongSound.currentTime = 0;
-    warningTimeSound.pause();
-    warningTimeSound.currentTime = 0;
-  };
-
-  return (
-    <QuizContext.Provider
-      value={{
-        index,
-        questions,
-        dispatch,
-        answer,
-        points,
-        highscore,
-        secsRemaining,
-        handleQuitClick,
-        handleCancel,
-        handleConfirm,
-        muteSound,
-        handleMuteSound,
-        isModalOpen,
-        warningTimeSound,
-      }}
-    >
-      {children}
-    </QuizContext.Provider>
+  return useMemo(
+    () => (
+      <QuizContext.Provider
+        value={{
+          index,
+          questions,
+          dispatch,
+          answer,
+          points,
+          highscore,
+          secsRemaining,
+          handleQuitClick,
+          handleCancel,
+          handleConfirm,
+          isModalOpen,
+        }}
+      >
+        {children}
+      </QuizContext.Provider>
+    ),
+    [
+      answer,
+      children,
+      highscore,
+      index,
+      isModalOpen,
+      points,
+      questions,
+      secsRemaining,
+    ]
   );
 };
 const useQuiz = () => {

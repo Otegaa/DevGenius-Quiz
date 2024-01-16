@@ -2,12 +2,12 @@ import Question from './Question';
 import Header from './Header';
 import Footer from './Footer';
 import Progress from './Progress';
-import MuteSound from './MuteSound';
+import ToggleSound from './ToggleSound';
 
 const Questions = () => {
   return (
     <div>
-      <MuteSound />
+      <ToggleSound />
       <Header />
       <Progress />
       <Question />

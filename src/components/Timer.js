@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useLanguageParam from '../hooks/useLanguageParams';
 
 const Timer = () => {
-  const { dispatch, secsRemaining, warningTimeSound } = useQuiz();
+  const { dispatch, secsRemaining } = useQuiz();
   const navigate = useNavigate();
   const language = useLanguageParam();
   const mins = Math.floor(secsRemaining / 60);
@@ -17,17 +17,6 @@ const Timer = () => {
 
     return () => clearInterval(timeInterval);
   }, [dispatch]);
-
-  useEffect(() => {
-    if (secsRemaining === 30) {
-      warningTimeSound.loop = true;
-      warningTimeSound.play();
-    }
-    if (secsRemaining === 0) {
-      warningTimeSound.pause();
-      warningTimeSound.currentTime = 0;
-    }
-  }, [secsRemaining, warningTimeSound]);
 
   useEffect(() => {
     if (secsRemaining === 0) {

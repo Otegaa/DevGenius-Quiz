@@ -16,7 +16,6 @@ const Modal = () => {
         <button
           onClick={() => {
             handleConfirm();
-            warningTimeSound.pause();
             navigate('/languages');
           }}
         >
