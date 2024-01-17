@@ -23,10 +23,18 @@ const initialState = {
   points: 0,
   highscore: 0,
   secsRemaining: 0,
+  isSoundEnabled: true,
 };
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
+    case 'toggleSound': {
+      return {
+        ...state,
+        isSoundEnabled: !state.isSoundEnabled,
+      };
+    }
+
     case 'start': {
       const selectedLanguage = payload;
       const secsRemaining = state.questions[selectedLanguage].length * 15;
@@ -43,11 +51,11 @@ const reducer = (state, { type, payload }) => {
       const question = currentQuestions[index];
       const isCorrect = answer === question.correctOption;
 
-      if (isCorrect) {
+      if (isCorrect && state.isSoundEnabled) {
         playCorrectSound.currentTime = 0;
         playCorrectSound.play();
       }
-      if (!isCorrect) {
+      if (!isCorrect && state.isSoundEnabled) {
         playWrongSound.currentTime = 0;
         playWrongSound.play();
       }
@@ -98,7 +106,15 @@ const QuizProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [
-    { index, questions, answer, points, highscore, secsRemaining },
+    {
+      index,
+      questions,
+      answer,
+      points,
+      highscore,
+      secsRemaining,
+      isSoundEnabled,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -126,6 +142,7 @@ const QuizProvider = ({ children }) => {
           points,
           highscore,
           secsRemaining,
+          isSoundEnabled,
           handleQuitClick,
           handleCancel,
           handleConfirm,
@@ -144,6 +161,7 @@ const QuizProvider = ({ children }) => {
       points,
       questions,
       secsRemaining,
+      isSoundEnabled,
     ]
   );
 };
