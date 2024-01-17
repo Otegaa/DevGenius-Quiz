@@ -40,8 +40,8 @@ const Login = () => {
   // for validation
   useEffect(() => {
     setValidUserName(USER_REGEX.test(username));
-    setValidEmail(EMAIL_REGEX.test(email));
-    setValidPassword(PWD_REGEX.test(password));
+    // setValidEmail(EMAIL_REGEX.test(email));
+    // setValidPassword(PWD_REGEX.test(password));
   }, [username, email, password]);
 
   // for setting error messages to false when we start adjusting one input
@@ -54,9 +54,13 @@ const Login = () => {
     if (isAuthenticated) navigate('/languages', { replace: true });
   }, [isAuthenticated, navigate]);
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if ((username, email, password)) login(username, email, password);
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if ((username, email, password)) login(username, email, password);
+    if (username) login(username);
   };
 
   const handleShowPassword = () => {
@@ -99,7 +103,7 @@ const Login = () => {
           Letters, numbers, hyphens, underscores allowed
         </p>
 
-        <label htmlFor="email">
+        {/* <label htmlFor="email">
           Email
           <span className={validEmail ? 'success' : 'hide'}>
             <FaCheck />
@@ -156,10 +160,11 @@ const Login = () => {
           <br />
           Special characters allowed: <span>!</span> <span>@</span>{' '}
           <span>#</span> <span>$</span> <span>%</span>
-        </p>
-        <button disabled={!validEmail || !validUserName || !validPassword}>
+        </p> */}
+        {/* <button disabled={!validEmail || !validUserName || !validPassword}>
           Login
-        </button>
+        </button> */}
+        <button>Login</button>
       </form>
     </section>
   );

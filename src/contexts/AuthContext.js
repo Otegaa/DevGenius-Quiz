@@ -37,7 +37,10 @@ const AuthProvider = ({ children }) => {
   ] = useReducer(reducer, initialState);
 
   const login = (username, email, password) => {
-    if (username && email && password) {
+    // if (username && email && password) {
+    //   dispatch({ type: 'login', payload: { username, email, password } });
+    // }
+    if (username) {
       dispatch({ type: 'login', payload: { username, email, password } });
     }
   };

@@ -1,14 +1,20 @@
-import { createContext, useContext, useReducer, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useReducer,
+  useState,
+} from 'react';
 import { languagesQuestions } from 'data/questions';
 import correctAnswerSound from 'assets/Audio/correct-answer.mp3';
 import wrongAnswerSound from 'assets/Audio/Wrong-answer.mp3';
-import warningSound from 'assets/Audio/warning-sound.wav';
 
 const QuizContext = createContext();
 
 const playCorrectSound = new Audio(correctAnswerSound);
+playCorrectSound.volume = 0.1;
 const playWrongSound = new Audio(wrongAnswerSound);
-const warningTimeSound = new Audio(warningSound);
+playWrongSound.volume = 0.1;
 
 const initialState = {
   questions: languagesQuestions,
@@ -17,26 +23,42 @@ const initialState = {
   points: 0,
   highscore: 0,
   secsRemaining: 0,
+  isSoundEnabled: true,
 };
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
-    case 'start':
+    case 'toggleSound': {
+      return {
+        ...state,
+        isSoundEnabled: !state.isSoundEnabled,
+      };
+    }
+
+    case 'start': {
       const selectedLanguage = payload;
-      const secsRemaining = state.questions[selectedLanguage].length * 30;
+      const secsRemaining = state.questions[selectedLanguage].length * 15;
 
       return {
         ...state,
         secsRemaining: secsRemaining,
       };
+    }
 
-    case 'newAnswer':
+    case 'newAnswer': {
       const { language, index, answer } = payload;
       const currentQuestions = state.questions[language];
       const question = currentQuestions[index];
       const isCorrect = answer === question.correctOption;
-      if (isCorrect) playCorrectSound.play();
-      if (!isCorrect) playWrongSound.play();
+
+      if (isCorrect && state.isSoundEnabled) {
+        playCorrectSound.currentTime = 0;
+        playCorrectSound.play();
+      }
+      if (!isCorrect && state.isSoundEnabled) {
+        playWrongSound.currentTime = 0;
+        playWrongSound.play();
+      }
 
       const updatedPoints = isCorrect
         ? state.points + question.points
@@ -47,6 +69,7 @@ const reducer = (state, { type, payload }) => {
         answer,
         points: updatedPoints,
       };
+    }
 
     case 'nextQuestion':
       return {
@@ -83,7 +106,15 @@ const QuizProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [
-    { index, questions, answer, points, highscore, secsRemaining },
+    {
+      index,
+      questions,
+      answer,
+      points,
+      highscore,
+      secsRemaining,
+      isSoundEnabled,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -100,25 +131,38 @@ const QuizProvider = ({ children }) => {
     dispatch({ type: 'resetState' });
   };
 
-  return (
-    <QuizContext.Provider
-      value={{
-        index,
-        questions,
-        dispatch,
-        answer,
-        points,
-        highscore,
-        secsRemaining,
-        handleQuitClick,
-        handleCancel,
-        handleConfirm,
-        isModalOpen,
-        warningTimeSound,
-      }}
-    >
-      {children}
-    </QuizContext.Provider>
+  return useMemo(
+    () => (
+      <QuizContext.Provider
+        value={{
+          index,
+          questions,
+          dispatch,
+          answer,
+          points,
+          highscore,
+          secsRemaining,
+          isSoundEnabled,
+          handleQuitClick,
+          handleCancel,
+          handleConfirm,
+          isModalOpen,
+        }}
+      >
+        {children}
+      </QuizContext.Provider>
+    ),
+    [
+      answer,
+      children,
+      highscore,
+      index,
+      isModalOpen,
+      points,
+      questions,
+      secsRemaining,
+      isSoundEnabled,
+    ]
   );
 };
 const useQuiz = () => {

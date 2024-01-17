@@ -139,8 +139,21 @@ body {
   border-radius: 100px;
 }
 
-.warning {
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulsate {
   color: red;
+  animation: pulse 2s infinite;
 }
 
 /* Progress bar */
