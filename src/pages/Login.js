@@ -2,13 +2,21 @@ import { useAuth } from 'contexts/AuthContext';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { PiEyeLight, PiEyeSlash } from 'react-icons/pi';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
-  const { login } = useAuth();
+  const { showPassword, handleShowPassword, login } = useAuth();
   const navigate = useNavigate();
+
+  const userRef = useRef();
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -33,18 +41,32 @@ const Login = () => {
   return (
     <div>
       <form onSubmit={handleLogin}>
-        <label>Email:</label>
+        <h1>Sign in</h1>
+        <label htmlFor="email">Email:</label>
         <input
           type="email"
+          placeholder="email"
+          required
+          id="email"
+          ref={userRef}
+          autoComplete="off"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label>Password:</label>
+
+        <label htmlFor="password">Password:</label>
         <input
-          type="password"
+          type={!showPassword ? 'password' : 'text'}
+          placeholder="password"
+          id="password"
+          required
           value={password}
+          autoComplete="off"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <div onClick={handleShowPassword}>
+          {showPassword ? <PiEyeLight /> : <PiEyeSlash />}
+        </div>
         {errMsg && <p style={{ color: 'red' }}>{errMsg}</p>}
         <button type="submit">Login</button>
         <p>

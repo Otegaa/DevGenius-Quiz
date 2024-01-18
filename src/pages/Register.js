@@ -20,9 +20,11 @@ const Register = () => {
 
   const [successfulReg, setSuccessfulReg] = useState(false);
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errMsgReg, setErrMsgReg] = useState('');
 
-  const { register } = useAuth();
+  const { register, sendVerificationEmail, showPassword, handleShowPassword } =
+    useAuth();
 
   const userRef = useRef();
 
@@ -41,18 +43,27 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      await register(email, password);
-      setSuccessfulReg(true);
-      setIsEmail('');
-      setIsPassword('');
-    } catch (error) {
-      console.error('Registration error:', error.message);
-    }
-  };
+      const response = await register(email, password);
 
-  const handleShowPassword = () => {
-    setShowPassword((s) => !s);
+      if (response && response.user) {
+        await sendVerificationEmail(response.user);
+        setSuccessfulReg(true);
+        setIsEmail('');
+        setIsPassword('');
+      }
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        setErrMsgReg(
+          'Email address is already in use. Please use a different email.'
+        );
+      } else {
+        setErrMsgReg('Registration error. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const goToLogin = () => {
@@ -61,10 +72,13 @@ const Register = () => {
 
   return (
     <section>
+      {errMsgReg && <div style={{ color: 'red' }}>{errMsgReg}</div>}
       {successfulReg && (
-        <div>
-          <p>Registration successful! You can now log in.</p>
-          <button onClick={goToLogin}>Go to Login</button>
+        <div style={{ color: 'green' }}>
+          <p>
+            Registration successful! Please check your email inbox for a
+            verification link
+          </p>
         </div>
       )}
       <h2>Register</h2>
@@ -128,9 +142,15 @@ const Register = () => {
           Special characters allowed: <span>!</span> <span>@</span>{' '}
           <span>#</span> <span>$</span> <span>%</span>
         </p>
-        <button type="submit" disabled={!validEmail || !validPassword}>
-          Register
+        <button
+          type="submit"
+          disabled={!validEmail || !validPassword || loading}
+        >
+          {loading ? 'Registering...' : 'Register'}
         </button>
+        <p>
+          Already registered? <button onClick={goToLogin}>Go to Login</button>
+        </p>
       </form>
     </section>
   );

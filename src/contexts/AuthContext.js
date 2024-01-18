@@ -1,8 +1,15 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react';
 import { auth } from '../firebase';
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
@@ -20,7 +27,6 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         user: payload.user,
-        isAuthenticated: true,
       };
 
     case 'login':
@@ -39,6 +45,7 @@ const reducer = (state, { type, payload }) => {
 };
 
 const AuthProvider = ({ children }) => {
+  const [showPassword, setShowPassword] = useState(false);
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
@@ -57,6 +64,10 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  const handleShowPassword = () => {
+    setShowPassword((s) => !s);
+  };
+
   const register = async (email, password) => {
     try {
       const response = await createUserWithEmailAndPassword(
@@ -65,8 +76,17 @@ const AuthProvider = ({ children }) => {
         password
       );
       dispatch({ type: 'register', payload: { user: response.user } });
+      return response; // Return user data upon success
     } catch (error) {
-      console.error('Registration error:', error.message);
+      throw error; // Re-throw the error for handling in the calling function
+    }
+  };
+
+  const sendVerificationEmail = async (user) => {
+    try {
+      await sendEmailVerification(user);
+    } catch (error) {
+      console.error('Error sending verification email:', error.message);
     }
   };
 
@@ -90,7 +110,16 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, register, login, logout }}
+      value={{
+        user,
+        isAuthenticated,
+        register,
+        login,
+        logout,
+        sendVerificationEmail,
+        showPassword,
+        handleShowPassword,
+      }}
     >
       {children}
     </AuthContext.Provider>
