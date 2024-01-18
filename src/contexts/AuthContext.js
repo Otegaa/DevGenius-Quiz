@@ -1,21 +1,32 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
+import { auth } from '../firebase';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
 
 const AuthContext = createContext();
 
 const initialState = {
-  user: {},
+  user: null,
   isAuthenticated: false,
 };
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
+    case 'register':
+      return {
+        ...state,
+        user: payload.user,
+        isAuthenticated: true,
+      };
+
     case 'login':
       return {
         ...state,
-        user: {
-          username: payload.username,
-          email: payload.email,
-        },
+        user: payload.user,
         isAuthenticated: true,
       };
 
@@ -28,29 +39,58 @@ const reducer = (state, { type, payload }) => {
 };
 
 const AuthProvider = ({ children }) => {
-  const [
-    {
-      user: { email, username },
-      isAuthenticated,
-    },
-    dispatch,
-  ] = useReducer(reducer, initialState);
+  const [{ user, isAuthenticated }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
-  const login = (username, email, password) => {
-    // if (username && email && password) {
-    //   dispatch({ type: 'login', payload: { username, email, password } });
-    // }
-    if (username) {
-      dispatch({ type: 'login', payload: { username, email, password } });
+  useEffect(() => {
+    // listener for authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch({ type: 'login', payload: { user } });
+      } else {
+        dispatch({ type: 'logout' });
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const register = async (email, password) => {
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      dispatch({ type: 'register', payload: { user: response.user } });
+    } catch (error) {
+      console.error('Registration error:', error.message);
     }
   };
 
-  const logout = () => {
-    dispatch({ type: 'logout' });
+  const login = async (email, password) => {
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      dispatch({ type: 'login', payload: { user: response.user } });
+    } catch (error) {
+      console.error('Login error:', error.message);
+    }
   };
+
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      dispatch({ type: 'logout' });
+    } catch (error) {
+      console.error('Logout error:', error.message);
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ username, email, isAuthenticated, login, logout }}
+      value={{ user, isAuthenticated, register, login, logout }}
     >
       {children}
     </AuthContext.Provider>
@@ -60,7 +100,7 @@ const AuthProvider = ({ children }) => {
 const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined)
-    throw new Error('AuthContext was used outside AAuthProvider');
+    throw new Error('AuthContext was used outside AuthProvider');
   return context;
 };
 
