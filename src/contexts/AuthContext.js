@@ -76,9 +76,9 @@ const AuthProvider = ({ children }) => {
         password
       );
       dispatch({ type: 'register', payload: { user: response.user } });
-      return response; // Return user data upon success
+      return response;
     } catch (error) {
-      throw error; // Re-throw the error for handling in the calling function
+      throw error;
     }
   };
 
