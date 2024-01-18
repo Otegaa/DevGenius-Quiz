@@ -95,7 +95,7 @@ const AuthProvider = ({ children }) => {
       const response = await signInWithEmailAndPassword(auth, email, password);
       dispatch({ type: 'login', payload: { user: response.user } });
     } catch (error) {
-      console.error('Login error:', error.message);
+      throw error;
     }
   };
 

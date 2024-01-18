@@ -25,7 +25,11 @@ const Login = () => {
       navigate('/languages');
     } catch (error) {
       console.error('Login error:', error.message);
-      setErrMsg('Invalid email or password. Please try again.');
+      if (error.code === 'auth/invalid-credential') {
+        setErrMsg('Invalid email or password. Please try again.');
+      } else {
+        setErrMsg('Login failed. Please try again.');
+      }
     }
   };
 

@@ -41,6 +41,10 @@ const Register = () => {
     setValidPassword(PWD_REGEX.test(password));
   }, [email, password]);
 
+  useEffect(() => {
+    setErrMsgReg('');
+  }, [email, password]);
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
