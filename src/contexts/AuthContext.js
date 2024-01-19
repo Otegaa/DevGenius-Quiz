@@ -8,8 +8,10 @@ import {
 import { auth } from '../firebase';
 import {
   createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
@@ -86,14 +88,24 @@ const AuthProvider = ({ children }) => {
     try {
       await sendEmailVerification(user);
     } catch (error) {
-      console.error('Error sending verification email:', error.message);
+      throw error;
     }
   };
 
   const login = async (email, password) => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      dispatch({ type: 'login', payload: { user: response.user } });
+      const user = response.user;
+
+      console.log(user);
+
+      if (user.emailVerified) {
+        dispatch({ type: 'login', payload: { user } });
+      } else {
+        throw new Error(
+          'Email not verified. Please verify your email before logging in.'
+        );
+      }
     } catch (error) {
       throw error;
     }
@@ -108,6 +120,23 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const checkUserExists = async (email) => {
+    try {
+      const methods = await fetchSignInMethodsForEmail(auth, email);
+      return methods.length > 0;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const resetPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -119,6 +148,8 @@ const AuthProvider = ({ children }) => {
         sendVerificationEmail,
         showPassword,
         handleShowPassword,
+        checkUserExists,
+        resetPassword,
       }}
     >
       {children}

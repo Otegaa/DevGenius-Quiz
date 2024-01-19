@@ -18,28 +18,36 @@ const Login = () => {
     userRef.current.focus();
   }, []);
 
+  // for setting error messages to false when we start adjusting one input
+  useEffect(() => {
+    setErrMsg('');
+  }, [email, password]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await login(email, password);
       navigate('/languages');
     } catch (error) {
-      console.error('Login error:', error.message);
+      console.log(error.message);
       if (error.code === 'auth/invalid-credential') {
         setErrMsg('Invalid email or password. Please try again.');
+      } else if (error.message.includes('Email not verified')) {
+        setErrMsg(
+          'Email not verified. Please verify your email before logging in.'
+        );
       } else {
         setErrMsg('Login failed. Please try again.');
       }
     }
   };
 
-  // for setting error messages to false when we start adjusting one input
-  useEffect(() => {
-    setErrMsg('');
-  }, [email, password]);
-
   const goToRegister = () => {
     navigate('/register');
+  };
+
+  const goToResetPassword = () => {
+    navigate('/reset');
   };
 
   return (
@@ -76,6 +84,7 @@ const Login = () => {
         <p>
           Not registered yet? <button onClick={goToRegister}>Register</button>
         </p>
+        <button onClick={goToResetPassword}>Forgot password?</button>
       </form>
     </div>
   );

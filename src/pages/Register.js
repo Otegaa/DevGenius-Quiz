@@ -153,7 +153,7 @@ const Register = () => {
           {loading ? 'Registering...' : 'Register'}
         </button>
         <p>
-          Already registered? <button onClick={goToLogin}>Go to Login</button>
+          Already registered? <button onClick={goToLogin}>Back to Login</button>
         </p>
       </form>
     </section>
