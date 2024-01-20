@@ -36,6 +36,8 @@ const Login = () => {
         setErrMsg(
           'Email not verified. Please verify your email before logging in.'
         );
+      } else if (error.message === 'auth/network-request-failed') {
+        setErrMsg('Network-request-failed');
       } else {
         setErrMsg('Login failed. Please try again.');
       }

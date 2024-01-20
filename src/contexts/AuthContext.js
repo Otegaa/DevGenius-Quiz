@@ -5,7 +5,7 @@ import {
   useReducer,
   useState,
 } from 'react';
-import { auth } from '../firebase';
+import { auth } from '../services/firebase';
 import {
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
@@ -14,6 +14,7 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 
 const AuthContext = createContext();
@@ -48,6 +49,7 @@ const reducer = (state, { type, payload }) => {
 
 const AuthProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState(null);
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
@@ -70,16 +72,18 @@ const AuthProvider = ({ children }) => {
     setShowPassword((s) => !s);
   };
 
-  const register = async (email, password) => {
+  const register = async (email, password, username) => {
     try {
       const response = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+      await updateProfile(response.user, { displayName: username });
       dispatch({ type: 'register', payload: { user: response.user } });
       return response;
     } catch (error) {
+      console.log(error.message);
       throw error;
     }
   };
@@ -97,7 +101,8 @@ const AuthProvider = ({ children }) => {
       const response = await signInWithEmailAndPassword(auth, email, password);
       const user = response.user;
 
-      console.log(user);
+      const displayName = user.displayName;
+      setUsername(displayName);
 
       if (user.emailVerified) {
         dispatch({ type: 'login', payload: { user } });
@@ -141,6 +146,7 @@ const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        username,
         isAuthenticated,
         register,
         login,
