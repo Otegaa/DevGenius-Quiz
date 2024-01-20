@@ -9,6 +9,8 @@ import Error from './Error';
 import Login from 'pages/Login';
 import ProtectedRoute from 'pages/ProtectedRoute';
 import AppLayout from './AppLayout';
+import Register from 'pages/Register';
+import ForgotPassword from 'pages/ForgotPassword';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/reset" element={<ForgotPassword />} />
           <Route path="/login" element={<Login />} />
           <Route
             element={
