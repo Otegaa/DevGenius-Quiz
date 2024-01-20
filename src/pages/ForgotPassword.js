@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [passwordResetSuccess, setPasswordResetSuccess] = useState('');
   const [passwordResetError, setPasswordResetError] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
   const { checkUserExists, resetPassword } = useAuth();
 
   const userRef = useRef();
@@ -18,24 +17,18 @@ const ForgotPassword = () => {
     userRef.current.focus();
   }, []);
 
-  // for setting error messages to false when we start adjusting one input
-  useEffect(() => {
-    setPasswordResetError('');
-    setPasswordResetSuccess('');
-  }, [email]);
-
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       const userExists = await checkUserExists(email);
-      console.log(userExists);
 
       if (!userExists) {
         setPasswordResetError(
           'No user found with this email address. Please check and try again.'
         );
+        setPasswordResetSuccess('');
         return;
       }
 
@@ -43,14 +36,27 @@ const ForgotPassword = () => {
       setPasswordResetSuccess(
         'Password reset email sent. Please check your inbox.'
       );
+      setPasswordResetError('');
       setEmail('');
     } catch (error) {
-      setPasswordResetError(
-        'Error sending password reset email. Please try again.'
-      );
+      console.error('Authentication error:', error);
+
+      if (error.code === 'auth/too-many-requests') {
+        setPasswordResetError(
+          'Too many unsuccessful sign-in attempts. Please try again later.'
+        );
+      } else {
+        setPasswordResetError('Error signing in. Please try again.');
+      }
+      setPasswordResetSuccess('');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleEmailChange = () => {
+    setPasswordResetSuccess('');
+    setPasswordResetError('');
   };
 
   const goToLogin = () => {
@@ -60,7 +66,9 @@ const ForgotPassword = () => {
   return (
     <div>
       <h2>Forgot Your Password?</h2>
-      <p>Enter your email and we will send you a link to reset your password</p>
+      <p>
+        Enter your email, and we will send you a link to reset your password
+      </p>
       {passwordResetSuccess && (
         <div style={{ color: 'green' }}>{passwordResetSuccess}</div>
       )}
@@ -73,7 +81,10 @@ const ForgotPassword = () => {
           type="email"
           value={email}
           ref={userRef}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            handleEmailChange();
+          }}
           required
         />
         <button type="submit" disabled={loading}>
@@ -84,4 +95,5 @@ const ForgotPassword = () => {
     </div>
   );
 };
+
 export default ForgotPassword;
