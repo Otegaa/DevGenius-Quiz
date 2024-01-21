@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useReducer,
   useState,
 } from 'react';
@@ -142,24 +143,27 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        username,
-        isAuthenticated,
-        register,
-        login,
-        logout,
-        sendVerificationEmail,
-        showPassword,
-        handleShowPassword,
-        checkUserExists,
-        resetPassword,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+  return useMemo(
+    () => (
+      <AuthContext.Provider
+        value={{
+          user,
+          username,
+          isAuthenticated,
+          register,
+          login,
+          logout,
+          sendVerificationEmail,
+          showPassword,
+          handleShowPassword,
+          checkUserExists,
+          resetPassword,
+        }}
+      >
+        {children}
+      </AuthContext.Provider>
+    ),
+    [children, isAuthenticated, showPassword, user, username]
   );
 };
 
