@@ -36,6 +36,10 @@ const Login = () => {
         setErrMsg(
           'Email not verified. Please verify your email before logging in.'
         );
+      } else if (error.code === 'auth/wrong-password') {
+        setErrMsg('You have entered the wrong password');
+      } else if (error.code === 'auth/user-not-found') {
+        setErrMsg('You have not signed up. Please sign up before logging in');
       } else if (error.message === 'auth/network-request-failed') {
         setErrMsg('Network-request-failed');
       } else {

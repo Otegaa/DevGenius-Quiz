@@ -26,7 +26,7 @@ const initialState = {
   isSoundEnabled: true,
 };
 
-const reducer = (state, { type, payload }) => {
+const reducer = async (state, { type, payload }) => {
   switch (type) {
     case 'toggleSound': {
       return {

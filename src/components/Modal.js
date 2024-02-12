@@ -2,8 +2,7 @@ import { useQuiz } from 'contexts/QuizContext';
 import { useNavigate } from 'react-router-dom';
 
 const Modal = () => {
-  const { handleCancel, handleConfirm, isModalOpen, warningTimeSound } =
-    useQuiz();
+  const { handleCancel, handleConfirm, isModalOpen } = useQuiz();
   const navigate = useNavigate();
 
   if (!isModalOpen) return null;
