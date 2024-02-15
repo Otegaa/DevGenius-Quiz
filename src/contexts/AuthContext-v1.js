@@ -51,6 +51,7 @@ const reducer = (state, { type, payload }) => {
 const AuthProvider = ({ children }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState(null);
+
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
