@@ -1,6 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-* {
+/* @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap'); */
+
+/* * {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -11,9 +15,9 @@
 *::after,
 *::before {
   box-sizing: inherit;
-}
+} */
 
-html {
+/* html {
   box-sizing: border-box;
   font-size: 62.5%;
   font-family: 'Kumbh Sans', sans-serif;
@@ -31,11 +35,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
+} */
 
 /* Styles for buttons */
 
-.btn {
+/* .btn {
   display: block;
   font-family: inherit;
   color: inherit;
@@ -54,10 +58,10 @@ body {
 
 .btn[disabled]:hover {
   cursor: not-allowed;
-}
+} */
 
 /* Question-homepage */
-
+/* 
 .intro-page {
   display: flex;
   flex-direction: column;
@@ -115,10 +119,10 @@ body {
   display: block;
   margin: 0 auto;
   cursor: pointer;
-}
+} */
 
 /* Header */
-
+/* 
 .header {
   margin-top: 2rem;
   display: flex;
@@ -154,10 +158,10 @@ body {
 .pulsate {
   color: red;
   animation: pulse 2s infinite;
-}
+} */
 
 /* Progress bar */
-.progress {
+/* .progress {
   margin-bottom: 4rem;
   display: grid;
   justify-content: space-between;
@@ -182,10 +186,10 @@ progress {
 ::-webkit-progress-value {
   background-color: #ffa94d;
   border-radius: 1rem;
-}
+} */
 
 /* Options */
-.options {
+/* .options {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -214,17 +218,17 @@ progress {
 .option-img {
   width: 1rem;
   height: 1rem;
-}
+} */
 
 /* Footer */
-.footer {
+/* .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */
 
 /* Results */
-.result {
+/* .result {
   background-color: #ffa94d;
   color: #fff;
   border-radius: 10rem;
@@ -244,10 +248,10 @@ progress {
   font-size: 1.8rem;
   text-align: center;
   margin-bottom: 4.8rem;
-}
+} */
 
 /* Modal */
-.modal {
+/* .modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -283,4 +287,4 @@ progress {
 
 .hide {
   display: none;
-}
+} */
