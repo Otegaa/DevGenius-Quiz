@@ -37,7 +37,7 @@ const reducer = (state, { type, payload }) => {
 
     case 'start': {
       const selectedLanguage = payload;
-      const secsRemaining = state.questions[selectedLanguage].length * 15;
+      const secsRemaining = state.questions[selectedLanguage].length * 6;
 
       return {
         ...state,
