@@ -1,7 +1,7 @@
-import { useAuth } from 'contexts/AuthContext';
-import IntroPictures from '../components/IntroPictures';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useAuth } from "contexts/AuthContext";
+import IntroPictures from "../components/IntroPictures";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const QuestionsHomePage = () => {
   const { username, logout } = useAuth();
@@ -10,23 +10,22 @@ const QuestionsHomePage = () => {
 
   useEffect(() => {
     window.history.pushState(null, document.title, window.location.href);
-    window.addEventListener('popstate', function (event) {
+    window.addEventListener("popstate", function (event) {
       window.history.pushState(null, document.title, window.location.href);
     });
   }, [location]);
 
   const handleClick = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   return (
-    <div className="languages-box">
-      <h2>
-        Welcome {username}!... There are 10 questions for each
-        language/framework
+    <div className="px-10 py-10">
+      <h2 className="text-2xl">
+        Welcome <span className="font-bold">{username}!...</span>
       </h2>
-      <h4>Please select your favorite!</h4>
+      <p className="text-sm italic">Pick a subject to continue</p>
       <button onClick={handleClick}>Logout</button>
       <IntroPictures />
     </div>

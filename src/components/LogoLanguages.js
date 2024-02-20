@@ -1,6 +1,6 @@
-import { data } from 'data/data';
-import useLanguageParam from '../hooks/useLanguageParams';
-import getLanguageImage from './getLanguageImage';
+import { data } from "data/data";
+import useLanguageParam from "../hooks/useLanguageParams";
+import getLanguageImage from "./getLanguageImage";
 
 const LogoLanguages = () => {
   const language = useLanguageParam();
@@ -10,7 +10,7 @@ const LogoLanguages = () => {
       <img
         src={getLanguageImage(data, language)}
         alt={language}
-        className="header-img"
+        className="h-10 w-10"
       />
     </div>
   );

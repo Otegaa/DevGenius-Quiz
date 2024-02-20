@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <div className="intro-page">
+    <div className="mx-10 my-10">
       <h1 className="text-center text-xl text-yellow-500">
         Welcome to the DevGenius Quiz!😇
       </h1>
